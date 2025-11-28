@@ -4,9 +4,9 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
 const users = [
-  { id: 1, name: 'Jina Mtu', email: 'jina@akili.io', role: 'Admin', status: 'Active' },
-  { id: 2, name: 'Sana Wanjala', email: 'sana@akili.io', role: 'User', status: 'Active' },
-  { id: 3, name: 'Baraka Chumo', email: 'baraka@akili.io', role: 'User', status: 'Invited' },
+  { id: 1, name: 'Jina Mtu', email: 'jina@domain.com', role: 'Admin', status: 'Active' },
+  { id: 2, name: 'Sana Wanjala', email: 'sana@domain.com', role: 'User', status: 'Active' },
+  { id: 3, name: 'Baraka Chumo', email: 'baraka@domain.com', role: 'User', status: 'Invited' },
 ];
 
 export default function Admin() {

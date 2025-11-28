@@ -37,7 +37,7 @@ const ConnectionForm = ({ serviceName, fields }: ConnectionFormProps) => {
     toast.loading(`Connecting to ${serviceName}...`);
     console.log(`Connecting to ${serviceName} with:`, formState);
 
-    // Simulate API call
+    // MOCK: Simulate an API call
     setTimeout(() => {
       const isSuccess = Math.random() > 0.3; // 70% success rate
       if (isSuccess) {
@@ -165,4 +165,4 @@ export default function Upload() {
       </div>
     </div>
   );
-} 
+}

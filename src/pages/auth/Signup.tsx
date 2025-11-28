@@ -14,7 +14,7 @@ export default function Signup() {
       <Card className='mx-auto max-w-sm w-full'>
         <CardHeader>
           <div className='flex justify-center mb-4'>
-            <img src='https://storage.googleapis.com/dala-prod-public-storage/generated-images/03ebbed2-8ce6-43b7-a1d5-e3d7d802c70d/logo-zusldcd-1764310604835.webp' alt='AkiliDocs Logo' className='w-24 h-24' />
+            <img src='https://storage.googleapis.com/dala-prod-public-storage/generated-images/03ebbed2-8ce6-43b7-a1d5-e3d7d802c70d/logo-5nvhmli-1764327060471.webp' alt='SomaScribe Logo' className='w-24 h-24' />
           </div>
           <CardTitle className='text-2xl text-center'>Create an account</CardTitle>
           <CardDescription className='text-center'>Enter your information to create an account</CardDescription>
