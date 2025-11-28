@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { mockFiles, mockInsights } from '@/lib/mockData';
 import { File } from 'lucide-react';
 import { BarChart2, AlertTriangle, MessageSquare } from 'lucide-react';

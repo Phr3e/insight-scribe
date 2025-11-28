@@ -1,4 +1,3 @@
-import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { mockFiles, mockInsights } from '@/lib/mockData';
 import { BarChart2, AlertTriangle, MessageSquare } from 'lucide-react';

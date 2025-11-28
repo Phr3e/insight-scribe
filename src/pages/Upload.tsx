@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, ChangeEvent, FormEvent } from 'react';
 import { UploadCloud, File, Database, Warehouse, Server, HardDrive } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Input } from '@/components/ui/input';
@@ -6,17 +6,33 @@ import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 
-const ConnectionForm = ({ serviceName, fields }) => {
-  const [formState, setFormState] = useState(
-    fields.reduce((acc, field) => ({ ...acc, [field.name]: '' }), {})
+interface Field {
+  name: string;
+  label: string;
+  type: string;
+  placeholder: string;
+}
+
+interface ConnectionFormProps {
+  serviceName: string;
+  fields: Field[];
+}
+
+type FormState = {
+  [key: string]: string;
+};
+
+const ConnectionForm = ({ serviceName, fields }: ConnectionFormProps) => {
+  const [formState, setFormState] = useState<FormState>(
+    fields.reduce((acc: FormState, field: Field) => ({ ...acc, [field.name]: '' }), {})
   );
 
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormState((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     toast.loading(`Connecting to ${serviceName}...`);
     console.log(`Connecting to ${serviceName} with:`, formState);
@@ -37,15 +53,27 @@ const ConnectionForm = ({ serviceName, fields }) => {
       {fields.map((field) => (
         <div key={field.name} className='grid gap-2'>
           <Label htmlFor={field.name}>{field.label}</Label>
-          <Input
-            id={field.name}
-            name={field.name}
-            type={field.type}
-            placeholder={field.placeholder}
-            value={formState[field.name]}
-            onChange={handleChange}
-            required
-          />
+          {field.type === 'textarea' ? (
+            <textarea
+              id={field.name}
+              name={field.name}
+              placeholder={field.placeholder}
+              value={formState[field.name]}
+              onChange={handleChange}
+              required
+              className='flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50'
+            />
+          ) : (
+            <Input
+              id={field.name}
+              name={field.name}
+              type={field.type}
+              placeholder={field.placeholder}
+              value={formState[field.name]}
+              onChange={handleChange}
+              required
+            />
+          )}
         </div>
       ))}
       <Button type='submit' className='w-full'>Connect to {serviceName}</Button>
@@ -53,7 +81,7 @@ const ConnectionForm = ({ serviceName, fields }) => {
   );
 };
 
-const databaseFields = [
+const databaseFields: Field[] = [
   { name: 'host', label: 'Host', type: 'text', placeholder: 'e.g., localhost' },
   { name: 'port', label: 'Port', type: 'number', placeholder: 'e.g., 5432' },
   { name: 'user', label: 'Username', type: 'text', placeholder: 'e.g., admin' },
@@ -61,13 +89,13 @@ const databaseFields = [
   { name: 'database', label: 'Database Name', type: 'text', placeholder: 'e.g., production_db' },
 ];
 
-const bigQueryFields = [
+const bigQueryFields: Field[] = [
     { name: 'projectId', label: 'Project ID', type: 'text', placeholder: 'your-gcp-project-id' },
     { name: 'datasetId', label: 'Dataset ID', type: 'text', placeholder: 'your_dataset_id' },
     { name: 'keyfile', label: 'Service Account Key (JSON)', type: 'textarea', placeholder: 'Paste your JSON key file content here' },
 ];
 
-const redshiftFields = [
+const redshiftFields: Field[] = [
     { name: 'clusterId', label: 'Cluster Identifier', type: 'text', placeholder: 'your-redshift-cluster-id' },
     { name: 'database', label: 'Database Name', type: 'text', placeholder: 'your_database' },
     { name: 'dbUser', label: 'Database User', type: 'text', placeholder: 'your_db_user' },
@@ -137,4 +165,4 @@ export default function Upload() {
       </div>
     </div>
   );
-}
+} 
